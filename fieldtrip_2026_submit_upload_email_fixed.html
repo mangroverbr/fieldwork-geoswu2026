@@ -1,0 +1,1538 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ภาคสนาม - Field Work 2026 @ geoswu</title>
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --primary: #1f6b45;
+    --primary-dark: #174f35;
+    --primary-light: #eaf4ed;
+    --accent: #86b94b;
+    --bg: #f6f8f4;
+    --text: #25352d;
+    --text-light: #65746b;
+    --border: #d9e4d9;
+    --white: #ffffff;
+    --warning: #fff7e6;
+    --info: #eaf4ff;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Prompt', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+header {
+    background:
+        linear-gradient(135deg, rgba(245,250,240,.95), rgba(222,239,219,.92)),
+        radial-gradient(circle at 80% 20%, rgba(134,185,75,.3), transparent 35%);
+    color: var(--primary-dark);
+    padding: 1.4rem 2rem;
+    border-bottom: 1px solid rgba(31,107,69,.18);
+}
+
+.header-content {
+    max-width: 1250px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo-icon {
+    width: 70px;
+    height: 70px;
+    border: 4px solid var(--primary);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.3rem;
+    background: rgba(255,255,255,.55);
+}
+
+.logo h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: .25rem;
+}
+
+.logo span {
+    font-weight: 600;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: linear-gradient(90deg, var(--primary-dark), var(--primary));
+    box-shadow: 0 3px 12px rgba(0,0,0,.12);
+}
+
+.nav-container {
+    max-width: 1250px;
+    margin: auto;
+}
+
+.nav-tabs {
+    display: flex;
+    overflow-x: auto;
+}
+
+.nav-tab {
+    border: 0;
+    background: transparent;
+    color: white;
+    padding: 1rem 1.45rem;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 1rem;
+    white-space: nowrap;
+    border-left: 1px solid rgba(255,255,255,.08);
+    transition: .2s;
+}
+
+.nav-tab:hover,
+.nav-tab.active {
+    background: var(--accent);
+}
+
+main {
+    max-width: 1250px;
+    margin: auto;
+    padding: 2rem;
+}
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+.card {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 1.8rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,.08);
+    border: 1px solid rgba(31,107,69,.08);
+    margin-bottom: 1.5rem;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+}
+
+.card-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: #68ad83;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2rem;
+}
+
+.card-header h2 {
+    color: var(--primary-dark);
+    font-size: 1.9rem;
+}
+
+.alert {
+    display: flex;
+    gap: .8rem;
+    padding: 1rem;
+    border-radius: 12px;
+    margin: 1rem 0 1.5rem;
+}
+
+.alert-warning {
+    background: var(--warning);
+    border: 1px solid #f1d08a;
+}
+
+.alert-info {
+    background: var(--info);
+    border: 1px solid #b8d8ff;
+}
+
+.rules-list {
+    list-style: none;
+    display: grid;
+    gap: 1rem;
+}
+
+.rule-item {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 1rem;
+    padding: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: #fbfdfb;
+}
+
+.rule-number {
+    width: 42px;
+    height: 42px;
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
+.rule-item.important {
+    border-left: 5px solid var(--accent);
+}
+
+.rule-content h3 {
+    color: var(--primary-dark);
+    margin-bottom: .25rem;
+}
+
+.schedule-item {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid #edf0ed;
+}
+
+.schedule-time {
+    color: var(--primary-dark);
+    font-weight: 700;
+}
+
+.schedule-activity h4 {
+    color: var(--primary-dark);
+}
+
+.groups-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+}
+
+.group-card {
+    background: #fbfdfb;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+.group-card h3 {
+    color: var(--primary-dark);
+    margin-bottom: .5rem;
+}
+
+.bus-grid {
+    display: grid;
+    gap: 1.2rem;
+}
+
+.bus-card {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: white;
+}
+
+.bus-header {
+    background: var(--primary-light);
+    padding: .85rem 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.bus-header h3 {
+    color: var(--primary-dark);
+    font-size: 1.25rem;
+}
+
+.bus-header span {
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+.bus-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    gap: 1rem;
+    padding: 1.2rem;
+}
+
+.bus-section {
+    padding-right: 1rem;
+    border-right: 1px solid #e5ece5;
+}
+
+.bus-section:last-child {
+    border-right: none;
+}
+
+.bus-section h4 {
+    color: var(--primary-dark);
+    margin-bottom: .6rem;
+}
+
+.group-pill-list {
+    display: grid;
+    gap: .8rem;
+}
+
+.group-pill {
+    background: #f8fbf8;
+    border: 1px solid #e1eae1;
+    border-radius: 10px;
+    padding: .85rem;
+}
+
+.group-title {
+    color: var(--primary-dark);
+    font-weight: 700;
+    margin-bottom: .5rem;
+}
+
+.year-block {
+    margin-top: .65rem;
+}
+
+.year-block h5 {
+    color: var(--primary);
+    font-size: .95rem;
+    margin-bottom: .25rem;
+}
+
+.student-list {
+    columns: 2;
+    column-gap: 1.5rem;
+    padding-left: 1.2rem;
+}
+
+.student-list li {
+    break-inside: avoid;
+    margin-bottom: .28rem;
+    font-size: .94rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: .4rem;
+    color: var(--primary-dark);
+}
+
+input, select, textarea {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: .8rem;
+    font-family: inherit;
+}
+
+textarea {
+    min-height: 110px;
+}
+
+.file-upload {
+    border: 2px dashed var(--border);
+    border-radius: 12px;
+    padding: 1.2rem;
+    text-align: center;
+    cursor: pointer;
+    background: #fbfdfb;
+}
+
+.file-upload input {
+    display: none;
+}
+
+.file-upload-icon {
+    font-size: 2.2rem;
+}
+
+.btn {
+    border: none;
+    padding: .85rem 1.2rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 700;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+}
+
+.contact-item {
+    display: flex;
+    gap: .8rem;
+    background: #fbfdfb;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+.contact-icon {
+    font-size: 1.6rem;
+}
+
+footer {
+    background: var(--primary-dark);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.toast {
+    position: fixed;
+    right: 1.2rem;
+    bottom: 1.2rem;
+    background: var(--primary-dark);
+    color: white;
+    padding: .9rem 1.2rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 18px rgba(0,0,0,.18);
+    display: none;
+}
+
+.toast.show {
+    display: block;
+}
+
+@media (max-width: 900px) {
+    .header-content {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+    .logo h1 {
+        font-size: 1.35rem;
+    }
+    .logo-icon {
+        width: 54px;
+        height: 54px;
+        font-size: 1.8rem;
+    }
+    main {
+        padding: 1rem;
+    }
+    .bus-content {
+        grid-template-columns: 1fr;
+    }
+    .bus-section {
+        border-right: none;
+        border-bottom: 1px solid #e5ece5;
+        padding-bottom: 1rem;
+    }
+    .bus-section:last-child {
+        border-bottom: none;
+    }
+    .student-list {
+        columns: 1;
+    }
+    .schedule-item {
+        grid-template-columns: 70px 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+<header>
+    <div class="header-content">
+        <div class="logo">
+            <span class="logo-icon">🌿</span>
+            <div>
+                <h1>Field Trip 2026 @ geoswu วันที่ 20-23 พฤษภาคม 2569</h1>
+                <span>#พิสูจน์อดีต #สำรวจปัจจุบัน #คาดการณ์อนาคต #เพื่อสังคม</span>
+            </div>
+        </div>
+        <div style="font-size: 0.95rem; opacity: 0.95;">📍 Field Trip@2026</div>
+    </div>
+</header>
+
+<nav>
+    <div class="nav-container">
+        <div class="nav-tabs">
+            <button class="nav-tab active" data-page="rules">📋 คู่มือปฏิบัติ</button>
+            <button class="nav-tab" data-page="schedule">📅 กำหนดการ</button>
+            <button class="nav-tab" data-page="bus-list">🚌 รายชื่อประจำรถ</button>
+            <button class="nav-tab" data-page="submit">👥 ส่งงาน</button>
+            <button class="nav-tab" data-page="contact">📞 ติดต่อ</button>
+        </div>
+    </div>
+</nav>
+
+<main>
+    <div class="page active" id="rules">
+        <div class="card">
+            <div class="card-header">
+                <span class="card-icon">📋</span>
+                <h2>คู่มือปฏิบัติภาคสนาม</h2>
+            </div>
+            <div class="alert alert-warning">
+                <span>⚠️</span>
+                <div><strong>สำคัญ:</strong> นิสิตทุกคนต้องอ่านและปฏิบัติตามข้อกำหนดอย่างเคร่งครัด</div>
+            </div>
+            <ul class="rules-list">
+                <li class="rule-item important"><span class="rule-number">1</span><div class="rule-content"><h3>ความปลอดภัยต้องมาก่อน</h3><p>ห้ามแยกออกจากกลุ่มโดยไม่ได้รับอนุญาต และต้องอยู่ในสายตาของอาจารย์หรือพี่เลี้ยงเสมอ</p></div></li>
+                <li class="rule-item"><span class="rule-number">2</span><div class="rule-content"><h3>การแต่งกาย</h3><p>สวมรองเท้าหุ้มส้น เสื้อแขนยาว หมวก และเตรียมอุปกรณ์กันแดดให้เหมาะสม</p></div></li>
+                <li class="rule-item"><span class="rule-number">3</span><div class="rule-content"><h3>อุปกรณ์ประจำตัว</h3><p>สมุดบันทึก ปากกา โทรศัพท์/กล้องถ่ายรูป น้ำดื่ม ยาประจำตัว และถุงเก็บขยะ</p></div></li>
+                <li class="rule-item"><span class="rule-number">4</span><div class="rule-content"><h3>การเก็บข้อมูลภาคสนาม</h3><p>ปฏิบัติตามแผนงานของกลุ่ม บันทึกข้อมูลให้ครบถ้วน และไม่รบกวนชุมชนหรือพื้นที่ศึกษา</p></div></li>
+                <li class="rule-item important"><span class="rule-number">5</span><div class="rule-content"><h3>ตรงต่อเวลา</h3><p>รวมพลตามเวลาที่กำหนดทุกครั้ง เพื่อไม่ให้กระทบต่อกิจกรรมของกลุ่มและรถโดยสาร</p></div></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="page" id="schedule">
+        <div class="card">
+            <div class="card-header">
+                <span class="card-icon">📅</span>
+                <h2>กำหนดการภาคสนาม</h2>
+            </div>
+            <div class="alert alert-info">
+                <span>📍</span>
+                <div>
+                    <strong>สถานที่:</strong> จังหวัดเพชรบุรี<br>
+                    <strong>วันที่:</strong> 20-23 พฤษภาคม 2569<br>
+                    <strong>ที่พัก:</strong> ชะอำ อีโค่ แคมป์ อำเภอชะอำ จังหวัดเพชรบุรี
+                </div>
+            </div>
+            <h3 style="margin: 1.5rem 0 1rem; color: var(--primary-dark);">วันที่ 20 พฤษภาคม 2569</h3>
+            <div class="schedule-item"><div class="schedule-time">06:00</div><div class="schedule-activity"><h4>เช็คชื่อ เข้ากลุ่ม และขึ้นรถ</h4><p>นิสิตนำสัมภาระขึ้นรถ</p></div></div>
+            <div class="schedule-item"><div class="schedule-time">06:30</div><div class="schedule-activity"><h4>เดินทางออกจาก มศว</h4><p>เดินทางโดยรถบัสโดยสารปรับอากาศ พร้อมรับประทานอาหารเช้าบนรถ</p></div></div>
+            <div class="schedule-item"><div class="schedule-time">09:00</div><div class="schedule-activity"><h4>เดินทางถึงที่พัก</h4><p>ชะอำ อีโค่ แคมป์ และเตรียมความพร้อมออกภาคสนาม</p></div></div>
+            <div class="schedule-item"><div class="schedule-time">10:00</div><div class="schedule-activity"><h4>แบ่งกลุ่มสำรวจภาคสนาม</h4><p>นิสิตสำรวจและฝึกปฏิบัติในพื้นที่แต่ละชุมชน/หมู่บ้านตามที่ได้รับมอบหมาย</p></div></div>
+            <div class="schedule-item"><div class="schedule-time">18:00</div><div class="schedule-activity"><h4>ฝึกภาคปฏิบัติการวางแผนเก็บข้อมูลภาคสนาม</h4><p>วิทยากร 8 ท่าน ฝึกภาคปฏิบัติให้นิสิต 16 กลุ่ม</p></div></div>
+            <div class="schedule-item"><div class="schedule-time">22:00</div><div class="schedule-activity"><h4>พักผ่อนตามอัธยาศัย</h4></div></div>
+
+            <h3 style="margin: 1.5rem 0 1rem; color: var(--primary-dark);">วันที่ 21 พฤษภาคม 2569</h3>
+            <div class="schedule-item"><div class="schedule-time">07:00</div><div class="schedule-activity"><h4>รับประทานอาหารเช้า</h4></div></div>
+            <div class="schedule-item"><div class="schedule-time">08:30</div><div class="schedule-activity"><h4>ออกเดินทางฝึกอบรมและปฏิบัติการภาคสนาม</h4><p>สำรวจและฝึกปฏิบัติในพื้นที่แต่ละชุมชน/หมู่บ้านต่อ</p></div></div>
+            <div class="schedule-item"><div class="schedule-time">13:00</div><div class="schedule-activity"><h4>วิเคราะห์ข้อมูลและประชุมกลุ่ม</h4></div></div>
+            <div class="schedule-item"><div class="schedule-time">22:00</div><div class="schedule-activity"><h4>พักผ่อนตามอัธยาศัย</h4></div></div>
+
+            <h3 style="margin: 1.5rem 0 1rem; color: var(--primary-dark);">วันที่ 22 พฤษภาคม 2569</h3>
+            <div class="schedule-item"><div class="schedule-time">08:30</div><div class="schedule-activity"><h4>วิเคราะห์ข้อมูลและประชุมกลุ่ม</h4></div></div>
+            <div class="schedule-item"><div class="schedule-time">13:00</div><div class="schedule-activity"><h4>นำเสนอผลจากการสำรวจภาคสนาม</h4></div></div>
+            <div class="schedule-item"><div class="schedule-time">18:00</div><div class="schedule-activity"><h4>นำเสนอผลจากการสำรวจภาคสนาม</h4></div></div>
+
+            <h3 style="margin: 1.5rem 0 1rem; color: var(--primary-dark);">วันที่ 23 พฤษภาคม 2569</h3>
+            <div class="schedule-item"><div class="schedule-time">08:00</div><div class="schedule-activity"><h4>กิจกรรมฐานการเรียนรู้</h4><p>นิสิตแบ่งกลุ่มเรียนรู้ตามฐานทั้งหมด 4 ฐาน</p></div></div>
+            <div class="schedule-item"><div class="schedule-time">13:00</div><div class="schedule-activity"><h4>เดินทางออกจากที่พัก</h4></div></div>
+            <div class="schedule-item"><div class="schedule-time">16:00</div><div class="schedule-activity"><h4>ถึง มศว โดยสวัสดิภาพ</h4><p>สิ้นสุดกิจกรรมภาคสนาม</p></div></div>
+        </div>
+    </div>
+        </div>
+    </div>
+
+    <div class="page" id="bus-list">
+        <div class="card">
+            <div class="card-header">
+                <span class="card-icon">🚌</span>
+                <h2>รายชื่อประจำรถ</h2>
+            </div>
+            <p style="margin-bottom: 1.5rem; color: var(--text-light);">
+                รายชื่ออาจารย์ผู้ประสานงาน บัณฑิต/พี่เลี้ยง และนิสิตประจำรถ
+            </p>
+            <div id="busContainer" class="bus-grid"></div>
+        </div>
+    </div>
+
+    <<div class="page" id="submit">
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <span class="card-icon">👥</span>
+
+            <h2>ส่งงาน</h2>
+
+        </div>
+
+        <p style="margin-bottom:1.5rem; color:var(--text-light);">
+
+            กดปุ่มด้านล่างเพื่อเปิด Google Form สำหรับส่งงานภาคสนาม
+
+        </p>
+
+        <a href="https://forms.gle/5weFme9i8P844ybz5"
+
+           target="_blank"
+
+           style="
+
+           display:inline-block;
+
+           background:#1f6b45;
+
+           color:white;
+
+           padding:1rem 1.5rem;
+
+           border-radius:12px;
+
+           text-decoration:none;
+
+           font-weight:700;
+
+           box-shadow:0 4px 10px rgba(0,0,0,.15);">
+
+           📤 เปิด Google Form ส่งงาน
+
+        </a>
+
+    </div>
+
+</div>
+
+
+    <div class="page" id="contact">
+        <div class="card">
+            <div class="card-header">
+                <span class="card-icon">📞</span>
+                <h2>ข้อมูลติดต่อ</h2>
+            </div>
+            <h3 style="margin-bottom: 1rem; color: var(--primary-dark);">อาจารย์ผู้ดูแล</h3>
+            <div class="contact-grid">
+                <div class="contact-item"><span class="contact-icon">👩‍🏫</span><div><strong>ภาควิชาภูมิศาสตร์</strong><p>คณะสังคมศาสตร์ มหาวิทยาลัยศรีนครินทรวิโรฒ</p></div></div>
+                <div class="contact-item"><span class="contact-icon">📍</span><div><strong>สถานที่ภาคสนาม</strong><p>จังหวัดเพชรบุรี</p></div></div>
+                <div class="contact-item"><span class="contact-icon">🚑</span><div><strong>เบอร์ฉุกเฉิน</strong><p>1669 / 191</p></div></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p>🌿 Field Trip Portal 2569 | ภาควิชาภูมิศาสตร์ คณะสังคมศาสตร์ มหาวิทยาลัยศรีนครินทรวิโรฒ</p>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const busData = [
+  {
+    "area": "ต.บ้านในดง",
+    "bus": "รถคันที่ 1",
+    "teacher": "ผศ.ดร.วุฒิชัย บุญพุก",
+    "mentor": "คุณญาดา เผือกผุด",
+    "groups": [
+      {
+        "group": "กลุ่ม 1 (16)",
+        "years": [
+          {
+            "year": "",
+            "students": [
+              "ผศ.ดร.วุฒิชัย บุญพุก",
+              "คุณญาดา เผือกผุด"
+            ]
+          },
+          {
+            "year": "ปี 4",
+            "students": [
+              "เอกบดินทร์ บุญรังษี"
+            ]
+          },
+          {
+            "year": "ปี 3",
+            "students": [
+              "นาย คุณานนต์ เอื้อจิระพงษ์พันธ์",
+              "นางสาว อรัญญา ขาวผิว",
+              "นาย ธิติพันธ์ ศรีวิลัย",
+              "นาย บัญญวัต พงศ์ไพสิทธิ์"
+            ]
+          },
+          {
+            "year": "ปี 2",
+            "students": [
+              "นายกิตติภพ เปี่ยมทองคำ",
+              "นางสาวสุชาดา อุอินทร์",
+              "นางสาวกมลวรรณ หงษ์ศรี",
+              "นายธนวัต สาลียงพวย",
+              "นางสาวชัญญานุช หอมแพง"
+            ]
+          },
+          {
+            "year": "ปี 1",
+            "students": [
+              "นางสาว ภัทรมน ศรีพุยเดช",
+              "นางสาว ธัญวรัตน์ แก้วเชียงหวาง",
+              "นาย วรพล รักษาราษฎร์",
+              "นางสาว ณัฐธิดา ร่วมชาติ",
+              "นาย ชวัลวิทย์ กองสุข",
+              "นางสาว ธัญสินี ศรีอรรคจันทร์",
+              "นางสาว สัณห์ฤทัย หอมพรมมา"
+            ]
+          }
+        ]
+      },
+      {
+        "group": "กลุ่ม 2 (15)",
+        "years": [
+          {
+            "year": "ปี 4",
+            "students": [
+              "ณัฐกิจ ไมตรีจิตต์"
+            ]
+          },
+          {
+            "year": "ปี 3",
+            "students": [
+              "นาย สุพจน์ ผ่องสอาด",
+              "นางสาว กัญญาพัชร เฉิดกุล",
+              "นาย จิรพงศ์ รอดผล",
+              "นาย ปาณัสม์ วีสี"
+            ]
+          },
+          {
+            "year": "ปี 2",
+            "students": [
+              "นางสาวภัทรานิษฐ์ ทองประเสริฐ",
+              "นางสาวณัฏฐธิดา เทพคุ้ม",
+              "นางสาวกษมา ธนบัตร",
+              "นางสาวนรินธรณ์ ดีมาก",
+              "นางสาวกรกมล โม้คำ"
+            ]
+          },
+          {
+            "year": "ปี 1",
+            "students": [
+              "นาย กฤษติพัชฐ์ ทะนันใจวิน",
+              "นาย กรรธณวุฒิ แสงศรีจันทร์",
+              "นางสาว มณิชญา บุญยะทิม",
+              "นางสาว อภิญญา หล้าสวัสดิ์",
+              "นางสาว ขวัญพิชชา อินทนู",
+              "นางสาว เกวรินทร์ อาชาเสถียร"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "area": "ต.มาบปลาเค้า",
+    "bus": "รถคันที่ 2",
+    "teacher": "ผศ.ดร.สถาพร มนต์ประภัสสร",
+    "mentor": "คุณอรอุษา รัตนจินดา",
+    "groups": [
+      {
+        "group": "กลุ่ม 3 (15)",
+        "years": [
+          {
+            "year": "",
+            "students": [
+              "ผศ.ดร.สถาพร มนต์ประภัสสร",
+              "คุณอรอุษา รัตนจินดา"
+            ]
+          },
+          {
+            "year": "ปี 4",
+            "students": [
+              "กฤษณะ เหมวัฒนานนท์"
+            ]
+          },
+          {
+            "year": "ปี 3",
+            "students": [
+              "นางสาว รุ่งทิวา โฉมสุข",
+              "นางสาว ปุณณภา ผลฉัตร",
+              "นางสาว สิรัณญา คงสมบูรณ์",
+              "นางสาว สุธิดา คนมั่ง"
+            ]
+          },
+          {
+            "year": "ปี 2",
+            "students": [
+              "นายกษิดิศ เพชรศรีกอง",
+              "นางสาวสุพรรษา สุรารักษ์",
+              "นางสาวเกตน์นิภา คำอินทร์",
+              "นางสาวนันท์นภัส วงค์ภักดี",
+              "นางสาวเครือวัลย์ คงธนดิฐ"
+            ]
+          },
+          {
+            "year": "ปี 1",
+            "students": [
+              "นาย ณัฐวัฒน์ บวรเกียรติไพศาล",
+              "นางสาว นิศรา เนียมแก้ว",
+              "นางสาว จิรภิญญา โลมรัตน์",
+              "นางสาว ฐิติภา บัวเงิน",
+              "นางสาว ลลิตา พิพัฒนรักไทย",
+              "นาย กวิน เอี่ยมสุเมธ"
+            ]
+          }
+        ]
+      },
+      {
+        "group": "กลุ่ม 4 (15)",
+        "years": [
+          {
+            "year": "ปี 4",
+            "students": [
+              "ปองพล พึ่งแสง",
+              "ธนโชติ งามเจริญสุขถาวร"
+            ]
+          },
+          {
+            "year": "ปี 3",
+            "students": [
+              "นางสาว สุธาทิพย์ โพธิ์แก้ว",
+              "นางสาว วรรสิริ พาศิริ",
+              "นาย พงศกร พุ่มพวง"
+            ]
+          },
+          {
+            "year": "ปี 2",
+            "students": [
+              "นางสาวสุทธิดา เขาแก้ว",
+              "นายธีระดนย์ ธรรมบุตร",
+              "นายวริทธิ์ กาดีโรจน์",
+              "นางสาวพิชชญา อุ่มบางตลาด",
+              "นายชวัลวิทย์ เอกพิริยานนท์",
+              "นางสาวธนภรณ์ กิตติโฆสกุล"
+            ]
+          },
+          {
+            "year": "ปี 1",
+            "students": [
+              "นางสาว วรรณวิสาข์ ช่วยประดิษฐ์",
+              "นางสาว ธัญชนก ซิงห์",
+              "นางสาว เบญญทิพย์ ผอมสันเทียะ",
+              "นางสาว อทิตติยา ชันโลน",
+              "นาย นพดล แก้วกาญจน์",
+              "นาย นครินทร์ ใจเต๊อะ"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "area": "ต.ไร่มะขาม",
+    "bus": "รถคันที่ 3",
+    "teacher": "ผศ.ดร.ชมชนก อรุณปลอด",
+    "mentor": "คุณขวัญพร ชมเชย",
+    "groups": [
+      {
+        "group": "กลุ่ม 5 (17)",
+        "years": [
+          {
+            "year": "",
+            "students": [
+              "ผศ.ดร.ชมชนก อรุณปลอด",
+              "คุณขวัญพร ชมเชย"
+            ]
+          },
+          {
+            "year": "ปี 4",
+            "students": [
+              "ขนิษฐา เครือวาลย์"
+            ]
+          },
+          {
+            "year": "ปี 3",
+            "students": [
+              "นางสาว กัญญารัตน์ เจนพิพัฒน์กุล",
+              "นางสาว สิปาง ลายเมฆ",
+              "นางสาว ธัญชนก ลีลา",
+              "นางสาว ภารวี ศรีบุญปวน"
+            ]
+          },
+          {
+            "year": "ปี 2",
+            "students": [
+              "นายอภิสิทธิ์ จริยะพันธุ์",
+              "นางสาวกมลชนก บุญเหลี่ยม",
+              "นางสาวมณธิญา ตะก้อง",
+              "นางสาวศรุตา อาดำ",
+              "นางสาวพิมพ์ชนก ศรีเจริญ",
+              "นางสาวดารินทร์ อนุกูล"
+            ]
+          },
+          {
+            "year": "ปี 1",
+            "students": [
+              "นางสาว พิมพ์ทอง เอี่ยมโสภณ",
+              "นางสาว อัญธิกา จูงกลาง",
+              "นางสาว เกศกนก สุขสวัสดิ์",
+              "นาย ภัทรพล คำตุ้ยเครือ",
+              "นางสาว สาภิชญา จิตรารวิสุต",
+              "นางสาว พิชาวีร์ นพชัยวัชรนนท์",
+              "นางสาว ธนพร น้อยวงษ์"
+            ]
+          }
+        ]
+      },
+      {
+        "group": "กลุ่ม 6 (17)",
+        "years": [
+          {
+            "year": "ปี 4",
+            "students": [
+              "นิธิยา ผลเกิด"
+            ]
+          },
+          {
+            "year": "ปี 3",
+            "students": [
+              "นางสาว นิธิวดี ทองด้วง",
+              "นางสาว พิชชา ชัยฤกษ์",
+              "นางสาว รุ้งสิตา โทสุวรรณ",
+              "นาย ธีรัตม์ ชุติกุลสุข"
+            ]
+          },
+          {
+            "year": "ปี 2",
+            "students": [
+              "นางสาวตรีดาว ศรีสังข์",
+              "นางสาวพรพิมล นาโควงค์",
+              "นางสาวเมธาพร พ่วงช่วงโชติ",
+              "นางสาวอนรรฆวี สุนทรภัค",
+              "นางสาวพนิดา บุญคำ",
+              "นางสาวมณฑิตา จิรโชติภาคิณ"
+            ]
+          },
+          {
+            "year": "ปี 1",
+            "students": [
+              "นางสาว จิดาภา จันทร์ทอง",
+              "นาย ปรีชาพล สิงหพัฒน์",
+              "นาย ฐปนวัฒน์ ฉันงูเหลือม",
+              "นาย พันวา แสงมณี",
+              "นาย ภูวดล ชำนาญกิจ",
+              "นาย พชรพล กลิ่นธูป",
+              "นาย สิทธิศักดิ์ ชิณจักร"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "area": "ต.หนองกระเจ็ด",
+    "bus": "รถคันที่ 4",
+    "teacher": "อ.ดร.ธีรเวทย์ ลิมโกมลวิลาศ",
+    "mentor": "คุณเมธินี ธูปประดิษฐ์",
+    "groups": [
+      {
+        "group": "กลุ่ม 7 (18)",
+        "years": [
+          {
+            "year": "",
+            "students": [
+              "อ.ดร.ธีรเวทย์ ลิมโกมลวิลาศ",
+              "คุณเมธินี ธูปประดิษฐ์"
+            ]
+          },
+          {
+            "year": "ปี 4",
+            "students": [
+              "ธีร์ธวัช สุขพญา"
+            ]
+          },
+          {
+            "year": "ปี 3",
+            "students": [
+              "นางสาว อัคริมา เมืองน้อย",
+              "นาย กรวิชญ์ มังคละเศรณี",
+              "นางสาว พิมพ์มาดา ทองประเฒ่า",
+              "นางสาว เพ็ญนภา ถิ่นเทพา"
+            ]
+          },
+          {
+            "year": "ปี 2",
+            "students": [
+              "นายกนกพล พลโยราช",
+              "นางสาวชิดชนก อยู่สุข",
+              "นายภานุพงศ์ มะราชลี",
+              "นางสาวอรัญญา เปลี่ยนทัพ",
+              "นางสาวกุลภรณ์ เสริมสวัสดิ์ศรี",
+              "นางสาวกานต์พิชชา คำพวง"
+            ]
+          },
+          {
+            "year": "ปี 1",
+            "students": [
+              "นาย ศิลา คงไทย",
+              "นางสาว ชนิดาภา เทพพิทักษ์",
+              "นางสาว ณัฐธิดา ศรีเกษม",
+              "นางสาว ดวงรัตน์ บัตรวิเศษ",
+              "นางสาว ณิชากร รักภักดี",
+              "นางสาว เปรมิกา สุขเกลอ",
+              "นาย ศุภกร สาระมะคุณ",
+              "นางสาว อมรพรรณ น้อยมงคล"
+            ]
+          }
+        ]
+      },
+      {
+        "group": "กลุ่ม 8 (17)",
+        "years": [
+          {
+            "year": "ปี 4",
+            "students": [
+              "ณัฐพนธ์ ผลานิสงค์"
+            ]
+          },
+          {
+            "year": "ปี 3",
+            "students": [
+              "นาย ฐิติพงศ์ ธานี",
+              "นางสาว ขันเงิน พูลสวัสดิ์",
+              "นางสาว เบญจวรรณ เอี๊ยวเจริญ",
+              "นางสาว วิภาพร ภูษณวิทย์"
+            ]
+          },
+          {
+            "year": "ปี 2",
+            "students": [
+              "นายณวัศพล ก่อเจริญ",
+              "นางสาวเขมจิรา สารีเพ็ง",
+              "นายชนาธิป คำนาค",
+              "นางสาวเวสิยา เมืองแสงศรี",
+              "นางสาวสิริขวัญ มงคลตั้งศิริกุล",
+              "นางสาวพาวรีย์ ทองพูล"
+            ]
+          },
+          {
+            "year": "ปี 1",
+            "students": [
+              "นาย ธนดล ยุทธนาวรากุล",
+              "นางสาว ชฎาภรณ์ เกียรติวีราภรณ์",
+              "นางสาว ธันยพร ขันวงศ์",
+              "นาย วิชปรมัตถ์ อินก๋า",
+              "นางสาว กัญญาณัฐ โพธิยา",
+              "นาย ปิยะศักดิ์ วรรณจิตต์",
+              "นาย ศุภวัฒน์ สุนประชา"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "area": "ต.ดอนยาง",
+    "bus": "รถคันที่ 5",
+    "teacher": "อ.ดร.สุธาทิพย์ ชวนะเวสสกุล",
+    "mentor": "คุณรัชประภา ไพบูลย์มั่น",
+    "groups": [
+      {
+        "group": "กลุ่ม 9 (17)",
+        "years": [
+          {
+            "year": "",
+            "students": [
+              "อ.ดร.สุธาทิพย์ ชวนะเวสสกุล",
+              "คุณรัชประภา ไพบูลย์มั่น"
+            ]
+          },
+          {
+            "year": "ปี 4",
+            "students": [
+              "เดชาวัสส์ ดาทอง"
+            ]
+          },
+          {
+            "year": "ปี 3",
+            "students": [
+              "นาย สุธี เหมือนสุข",
+              "นาย ภโวทัย ขลุดสกุล",
+              "นาย พันมงคล ศรีแตงทอง",
+              "นาย ชลวริศร์ ตองกระโทก"
+            ]
+          },
+          {
+            "year": "ปี 2",
+            "students": [
+              "นายธนะรัชต์ โคสาดี",
+              "นางสาวกวิสรา แก้วกัญญา",
+              "นางสาวเพ็ญรัฏฐ์ สกุลเจริญมาศ",
+              "นางสาวสาวิตรี ทาศรี",
+              "นางสาวจิราภา พึ่งนุสนธิ์",
+              "นายจิรภัทร ชาญเชี่ยว"
+            ]
+          },
+          {
+            "year": "ปี 1",
+            "students": [
+              "นางสาว ฐิติชญาน์ คชาชีวะ",
+              "นางสาว สุพิชชา คมขำ",
+              "นางสาว สุพรรษา ศาลยาชีวิน",
+              "นางสาว พุทธิดา ดอกไม้",
+              "นางสาว รวิษฎา สุวรรณเทน",
+              "นางสาว พิมพ์ชนก เถลิงสมบัติ",
+              "นาย อัครเมธี มีรอด"
+            ]
+          }
+        ]
+      },
+      {
+        "group": "กลุ่ม 10 (17)",
+        "years": [
+          {
+            "year": "ปี 4",
+            "students": [
+              "นนนนนท์ ณรงค์ทิพย์"
+            ]
+          },
+          {
+            "year": "ปี 3",
+            "students": [
+              "นางสาว ขวัญหทัย ทาทองคำ",
+              "นาย ธนพล เดียวเล๊าะ",
+              "นาย อมฤต ศิริภูมิรัตน์",
+              "นางสาว นภัทรศนีย์ ขุนรอง"
+            ]
+          },
+          {
+            "year": "ปี 2",
+            "students": [
+              "นายปวริศ บุญนิธิยรรยง",
+              "นายณัฐรัชต์ วิญญา",
+              "นางสาวอธิชา กองสินวิวัฒน์",
+              "นางสาวอรปรียา ชูแก้ว",
+              "นายธนัท โยมบุตร",
+              "นางสาวนัทธมน หนูพะไล"
+            ]
+          },
+          {
+            "year": "ปี 1",
+            "students": [
+              "นางสาว กุสุมา กองไพร",
+              "นาย บุญเลิศ เลิศแก้วมะณี",
+              "นางสาว วรัณญา กองสู",
+              "นาย กิตติทัต เศรษฐภักดี",
+              "นางสาว จุฑามาส เขาชัด",
+              "นาย รักษ์ หอมบุญเรือง",
+              "นาย ชัยบดินทร์ ศรีเมือง"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "area": "ต.หนองขนาน",
+    "bus": "รถคันที่ 6",
+    "teacher": "ผศ.กัลยาณี กุลชัย,ผศ.ดร.ปกรณ์ เมฆแสงสวย",
+    "mentor": "คุณอาทิตยา โคกกระชาย,\nคุณอาเขต สุขสมนึก",
+    "groups": [
+      {
+        "group": "กลุ่ม 11 (17)",
+        "years": [
+          {
+            "year": "",
+            "students": [
+              "ผศ.กัลยาณี กุลชัย,ผศ.ดร.ปกรณ์ เมฆแสงสวย",
+              "คุณอาทิตยา โคกกระชาย,\nคุณอาเขต สุขสมนึก"
+            ]
+          },
+          {
+            "year": "ปี 4",
+            "students": [
+              "จารุกร ตามวิสัย"
+            ]
+          },
+          {
+            "year": "ปี 3",
+            "students": [
+              "นางสาว ณัฐนันท์ อังกินันท์",
+              "นางสาว คุณัญญา ยงเขนยสิน",
+              "นางสาว ญาณิน เอี่ยมอ้อย",
+              "นางสาว ธนัชชา รอดย้อย"
+            ]
+          },
+          {
+            "year": "ปี 2",
+            "students": [
+              "นางสาวนิธินาถ นุ้ยเล็ก",
+              "นายวันชนะ เสาะด้น",
+              "นางสาวเบญญาภา บัณฑิต",
+              "นางสาวทักษอร สว่างสุข",
+              "นายจิรกฤต ผิวพันธมิตร",
+              "นางสาวณิชารีย์ กันเพียง"
+            ]
+          },
+          {
+            "year": "ปี 1",
+            "students": [
+              "นาย ธนบูลย์ พะลัง",
+              "นางสาว กมลชนก สวัสดิ์พันธ์",
+              "นาย ธนธรณ์ พะลัง",
+              "นางสาว ณัณณัฐฐา ลำดับศรี",
+              "นางสาว วัชรินทร์ แซ่หุ่น",
+              "นางสาว กันติชา คุ้มฤทธิ์",
+              "นาย ธนพงษ์ กัลยา"
+            ]
+          }
+        ]
+      },
+      {
+        "group": "กลุ่ม 12 (17)",
+        "years": [
+          {
+            "year": "ปี 4",
+            "students": [
+              "พรหมสวัสดิ์ พูลพรหม"
+            ]
+          },
+          {
+            "year": "ปี 3",
+            "students": [
+              "นางสาว รติมา ปวงสุข",
+              "นางสาว ศิรภัสสร ตั้งภาวนา",
+              "นาย พศวัต วงษ์แย้ม",
+              "นาย ณัฐพล ปาเจริญ"
+            ]
+          },
+          {
+            "year": "ปี 2",
+            "students": [
+              "นางสาวอินทิรา ทาประเสริฐ",
+              "นายยศภัทร ชวลี",
+              "นายณัฐวุฒิ อิสมาแอล",
+              "นางสาวนัชชา สุริการ",
+              "นางสาวอนัญญา จิตเสนาะ",
+              "นางสาววรารัตน์ ชัยภูมี"
+            ]
+          },
+          {
+            "year": "ปี 1",
+            "students": [
+              "นางสาว จิดาภา โคตา",
+              "นางสาว นงนภัส สุขจั่นผล",
+              "นาย ธนพัฒน์ น้อยมงคล",
+              "นาย ปัณณธร งามสมมาศ",
+              "นางสาว ธนิสร อมรศุภมิตร",
+              "นางสาว ณัฐชาดา คำตัน",
+              "นาย กฤษณัย ยวงเงิน"
+            ]
+          }
+        ]
+      },
+      {
+        "group": "กลุ่ม 13 (17)",
+        "years": [
+          {
+            "year": "ปี 4",
+            "students": [
+              "กิจณพัฒน์ สุขสด"
+            ]
+          },
+          {
+            "year": "ปี 3",
+            "students": [
+              "นางสาว ณัฐริกา ธาตุทอง",
+              "นางสาว อภิญญา ยากับ",
+              "นางสาว กรรณิการ์ ยิ่งยง",
+              "นางสาว นวภรณ์ มีเถื่อน"
+            ]
+          },
+          {
+            "year": "ปี 2",
+            "students": [
+              "นางสาวกัญญ์วรา อุยมา",
+              "นางสาวณัฐชา หล้าสิม",
+              "นายปัณณวัฒน์ ศรีจันทร์ดี",
+              "นายเจษฎาพงศ์ วิจิตรอลังการ",
+              "นางสาวชญาภา จันทร์ทอง",
+              "นางสาวมณีรัตน์ ไชยสุมัง"
+            ]
+          },
+          {
+            "year": "ปี 1",
+            "students": [
+              "นางสาว ลลิตา เจ๊ะเลาะ",
+              "นาย จิน ยี่ ซู",
+              "นาย เพชรรัตน์ อินทโต",
+              "นางสาว อาภากร นวภาณพงษ์",
+              "นาย กิตติกร บุณยานุตร์",
+              "นางสาว รัชนี สายคำกอง",
+              "นางสาว ปุณทิตา โคตรประดา"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "area": "ต.ปึกเตียน",
+    "bus": "รถคันที่ 7",
+    "teacher": "อ.จิรวัฒน์ ดารณีศรีสุข",
+    "mentor": "คุณยุพนรัตน์ พงษ์นัยรัตน์",
+    "groups": [
+      {
+        "group": "กลุ่ม 14 (16)",
+        "years": [
+          {
+            "year": "",
+            "students": [
+              "อ.จิรวัฒน์ ดารณีศรีสุข",
+              "คุณยุพนรัตน์ พงษ์นัยรัตน์"
+            ]
+          },
+          {
+            "year": "ปี 4",
+            "students": [
+              "ศุภนิดา มาระครอง",
+              "กันตพงษ์ รัตอนรุณ"
+            ]
+          },
+          {
+            "year": "ปี 3",
+            "students": [
+              "นาย นภพล สมหวัง",
+              "นางสาว วราทิพย์ โพธิ์ทอง",
+              "นาย ชยางกูร แก้วม่วง"
+            ]
+          },
+          {
+            "year": "ปี 2",
+            "students": [
+              "นายก้องภพ เกตุสมพงษ์",
+              "นายประกาศิต ทองสาย",
+              "นายเทพรัตน์ มาคราม",
+              "นางสาวชุติมณฑน์ อู่เงิน",
+              "นายวีริศ สุภาตรี",
+              "นายศุภกิตติ์ รุ่งโรจน์"
+            ]
+          },
+          {
+            "year": "ปี 1",
+            "students": [
+              "นางสาว ดานุทิน สืบวงษ์",
+              "นางสาว อภิสรา อับดุลลา",
+              "นาย กรัณย์กร พนัสพิทักษ์ชล",
+              "นาย ดลณภัทร สมัคธัญญกรณ์",
+              "นางสาว กุลธิดา สวายประโคน",
+              "นางสาว ปานวาด ทับสมุทร",
+              "นางสาว คณาคำ ธรรมรักขิต"
+            ]
+          }
+        ]
+      },
+      {
+        "group": "กลุ่ม 15 (16)",
+        "years": [
+          {
+            "year": "ปี 4",
+            "students": [
+              "ธนาสรรค์ เปรมสุข"
+            ]
+          },
+          {
+            "year": "ปี 3",
+            "students": [
+              "นายชาตินักรบ ภาคีชิต",
+              "นายอดิศร บุญเกิดมา",
+              "นายจักรพรรดิ์ กุณะ",
+              "นางสาวพิชญาพร ธรนันปภัค"
+            ]
+          },
+          {
+            "year": "ปี 2",
+            "students": [
+              "นางสาวพิชญาภา แก้วเจียรนัย",
+              "นายสีหนาท ประจำเมือง",
+              "นางสาว ปิยธิดา มอริส",
+              "นางสาว ปิยะวดี ฉ่ำสมบูรณ์",
+              "นาย ประวีร์ วารี",
+              "นางสาว ฉัตรพร อ่อนสาคร"
+            ]
+          },
+          {
+            "year": "ปี 1",
+            "students": [
+              "นาย เสฏฐพงษ์ ศิริทิพย์",
+              "นางสาว ชนัญชิดา รุจิจิตร",
+              "นางสาว มนัสนันท์ สุขกิจ"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+];
+
+const navTabs = document.querySelectorAll('.nav-tab');
+const pages = document.querySelectorAll('.page');
+
+navTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        const targetPage = tab.dataset.page;
+        navTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        pages.forEach(p => p.classList.remove('active'));
+        document.getElementById(targetPage).classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+});
+
+function escapeHTML(value) {
+    return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+}
+
+function renderBusList() {
+    const busContainer = document.getElementById("busContainer");
+    busContainer.innerHTML = "";
+
+    busData.forEach(bus => {
+        const groupsHTML = bus.groups.map(group => {
+            const yearsHTML = group.years.map(block => {
+                const names = block.students
+                    .filter(Boolean)
+                    .map(name => `<li>${escapeHTML(name)}</li>`)
+                    .join("");
+
+                if (!names) return "";
+
+                return `
+                    <div class="year-block">
+                        ${block.year ? `<h5>${escapeHTML(block.year)}</h5>` : ""}
+                        <ol class="student-list">${names}</ol>
+                    </div>
+                `;
+            }).join("");
+
+            return `
+                <div class="group-pill">
+                    <div class="group-title">${escapeHTML(group.group)}</div>
+                    ${yearsHTML}
+                </div>
+            `;
+        }).join("");
+
+        const teacherList = escapeHTML(bus.teacher).split("\n").join("<br>");
+        const mentorList = escapeHTML(bus.mentor).split("\n").join("<br>");
+
+        const card = document.createElement("div");
+        card.className = "bus-card";
+        card.innerHTML = `
+            <div class="bus-header">
+                <h3>🚌 ${escapeHTML(bus.bus)}</h3>
+                <span>${escapeHTML(bus.area)}</span>
+            </div>
+
+            <div class="bus-content">
+                <div class="bus-section">
+                    <h4>อาจารย์ผู้ประสานงาน</h4>
+                    <p>${teacherList || "-"}</p>
+                </div>
+
+                <div class="bus-section">
+                    <h4>บัณฑิต/พี่เลี้ยง</h4>
+                    <p>${mentorList || "-"}</p>
+                </div>
+
+                <div class="bus-section">
+                    <h4>กลุ่มนิสิต</h4>
+                    <div class="group-pill-list">${groupsHTML}</div>
+                </div>
+            </div>
+        `;
+        busContainer.appendChild(card);
+    });
+}
+
+
+renderBusList();
+
+const fileInput = document.getElementById('fileInput');
+const fileSelected = document.getElementById('fileSelected');
+
+if (fileInput) {
+    fileInput.addEventListener('change', (e) => {
+        if (e.target.files.length > 0) {
+            const file = e.target.files[0];
+            const sizeMB = (file.size / 1024 / 1024).toFixed(2);
+            fileSelected.textContent = `📎 ${file.name} (${sizeMB} MB)`;
+            fileSelected.style.display = 'block';
+        }
+    });
+}
+
+const submitForm = document.getElementById('submitForm');
+
+if (submitForm) {
+    submitForm.addEventListener('submit', () => {
+        const selectedGroup = document.getElementById('groupSelect').value;
+        const selectedDay = document.getElementById('daySelect').value;
+        const senderName = document.getElementById('senderName').value;
+        const groupResult = document.getElementById('groupResult');
+        const groupResultText = document.getElementById('groupResultText');
+
+        if (groupResult && groupResultText) {
+            groupResultText.innerHTML = `
+                กลุ่ม: <strong>${escapeHTML(selectedGroup)}</strong><br>
+                วันที่ / กิจกรรม: <strong>${escapeHTML(selectedDay)}</strong><br>
+                ผู้ส่ง: <strong>${escapeHTML(senderName)}</strong><br>
+                ระบบกำลังส่งไปที่ <strong>cherryhihi@gmail.com</strong>
+            `;
+            groupResult.style.display = 'block';
+        }
+
+        showToast('📤 กำลังส่งงานไปที่ cherryhihi@gmail.com...');
+    });
+}
+
+function showToast(message) {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 3000);
+}
+</script>
+</body>
+</html>
